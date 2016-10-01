@@ -31,7 +31,7 @@ from warnings import warn
 
 import numpy as np
 
-from ._config import _debug, setup_args
+from ._config import _debug
 from ._simulateDSM_python import simulateDSM as _simulateDSM_python
 from ._utils import _get_zpk, _is_zpk
 
@@ -50,7 +50,7 @@ try:
         # not being available.
         raise ImportError('CBLAS extension disabled on Windows')
     import pyximport
-    pyximport.install(setup_args=setup_args)
+    pyximport.install()
     from ._simulateDSM_cblas import simulateDSM as _simulateDSM_cblas
 except ImportError as e:
     if _debug:
@@ -59,7 +59,7 @@ except ImportError as e:
 
 try:
     import pyximport
-    pyximport.install(setup_args=setup_args, inplace=True)
+    pyximport.install(inplace=True)
     from ._simulateDSM_scipy_blas import simulateDSM as _simulateDSM_scipy_blas
 except ImportError as e:
     if _debug:

@@ -27,7 +27,7 @@ import scipy
 from scipy.linalg import lstsq
 from scipy.signal import freqz, tf2zpk
 
-from ._config import _debug, setup_args
+from ._config import _debug
 from ._ds_quantize import ds_quantize
 from ._evalTF import evalTF
 from ._partitionABCD import partitionABCD
@@ -37,7 +37,7 @@ from ._utils import carray, diagonal_indices, _is_zpk, _is_A_B_C_D, _is_num_den
 # core of the simulation code`
 try:
     import pyximport
-    pyximport.install(setup_args=setup_args, inplace=True)
+    pyximport.install(inplace=True)
     from ._simulateQDSM_core import simulateQDSM_core
 except ImportError as e:
     if _debug:

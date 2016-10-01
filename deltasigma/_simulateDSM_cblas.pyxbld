@@ -1,0 +1,24 @@
+def make_ext(modname, pyxfilename):
+    from distutils.extension import Extension
+    import numpy as np
+    import sys
+
+
+    args = {
+        "name"          : modname,
+        "sources"       : [pyxfilename],
+        "include_dirs"  : [ np.get_include() ],
+    }
+
+
+
+    if 'darwin' in sys.platform:
+        args['include_dirs'].append(
+            "/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Versions/Current/Headers"
+            )
+
+    elif 'linux' in sys.platform:
+        args['libraries']   = ["tatlas"]
+        args['library_dirs']= ["/usr/lib64/atlas"]
+
+    return Extension(**args)
