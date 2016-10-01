@@ -1,1 +1,1 @@
-recursive-include deltasigma *.pyx *.px[di]
+recursive-include deltasigma *.pyx *.px[di] *.pyxbld
